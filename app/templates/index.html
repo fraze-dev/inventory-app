@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>USF Inventory System</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #006747; }
+        nav a { margin-right: 20px; text-decoration: none; color: #006747; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background-color: #006747; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .low { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>USF Inventory System</h1>
+    <nav>
+        <a href="/">Inventory</a>
+        <a href="/order">Place Order</a>
+        <a href="/restock">Restock</a>
+    </nav>
+    <h2>Current Inventory</h2>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Stock</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td class="{{ 'low' if product.stock < 10 else '' }}">
+                {{ product.stock }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

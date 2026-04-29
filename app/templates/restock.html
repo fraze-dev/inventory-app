@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restock — USF Inventory</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #006747; }
+        nav a { margin-right: 20px; text-decoration: none; color: #006747; font-weight: bold; }
+        form { margin-top: 20px; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        select, input[type=number] { width: 100%; padding: 8px; margin-top: 5px; }
+        button { margin-top: 20px; padding: 10px 25px; background-color: #006747;
+                 color: white; border: none; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #004d35; }
+        .message { margin-top: 20px; padding: 10px; background-color: #e8f5e9; border-left: 4px solid #006747; }
+    </style>
+</head>
+<body>
+    <h1>USF Inventory System</h1>
+    <nav>
+        <a href="/">Inventory</a>
+        <a href="/order">Place Order</a>
+        <a href="/restock">Restock</a>
+    </nav>
+    <h2>Restock Inventory</h2>
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
+    <form method="POST">
+        <label for="product">Select Product:</label>
+        <select name="product" id="product">
+            {% for product in products %}
+            <option value="{{ product.name }}">
+                {{ product.name }} ({{ product.stock }} in stock)
+            </option>
+            {% endfor %}
+        </select>
+        <label for="quantity">Quantity to Add:</label>
+        <input type="number" name="quantity" id="quantity" value="1" min="1">
+        <button type="submit">Receive Shipment</button>
+    </form>
+</body>
+</html>
