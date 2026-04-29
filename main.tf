@@ -97,11 +97,11 @@ resource "aws_security_group" "mongo_sg" {
   }
 
   ingress {
-    description = "SSH from your IP"
+    description = "SSH from my IP"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${var.my_ip}/32"]
+    cidr_blocks = ["${var.my_ip}/32", "172.31.0.0/16"]
   }
 
   egress {
