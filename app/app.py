@@ -1,3 +1,9 @@
+# app.py
+# Flask application for Cis4930 final project
+# sets 3 routes for inventory, place order and restock
+# Connects to mongo db
+
+
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 import os
@@ -5,10 +11,12 @@ import os
 app = Flask(__name__)
 
 def get_db():
+    # connects to MongoDB
     mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017")
     client = MongoClient(mongo_uri, serverSelectionTimeoutMS=3000)
     return client["inventory_db"]
 
+# Product List
 STARTER_PRODUCTS = [
     {"name": "Sweatshirt",    "stock": 50},
     {"name": "T-shirt",    "stock": 30},
@@ -23,6 +31,7 @@ def seed_db(db):
 
 @app.route("/")
 def index():
+    # displays current inventory
     db = get_db()
     seed_db(db)
     products = list(db["products"].find())
@@ -30,6 +39,7 @@ def index():
 
 @app.route("/order", methods=["GET", "POST"])
 def order():
+    # allows for placing an order
     db = get_db()
     seed_db(db)
     message = None
@@ -52,6 +62,7 @@ def order():
 
 @app.route("/restock", methods=["GET", "POST"])
 def restock():
+    # allows for restocking
     db = get_db()
     seed_db(db)
     message = None
