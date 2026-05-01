@@ -1,3 +1,8 @@
+# main.tf
+# Terraform configuration for cis4930 final project.
+# Provisions three EC2 instances on AWS: Jenkins, App Server, and MongoDB.
+# Amazon Linux 2 in us-east-1.
+
 terraform {
   required_providers {
     aws = {
