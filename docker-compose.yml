@@ -5,8 +5,8 @@ services:
     image: mongo:7
     container_name: mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: ChangeMe123
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
     volumes:
       - mongo_data:/data/db
 
@@ -16,7 +16,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      MONGO_URI: mongodb://admin:ChangeMe123@mongo:27017/?authSource=admin
+      MONGO_URI: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongo:27017/?authSource=admin
     depends_on:
       - mongo
 
