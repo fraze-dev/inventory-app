@@ -1,9 +1,16 @@
+// Jenkinsfile
+// CI/CD pipeline
+// Automates building and deploying flask app on AWS EC2
+// 
+
 pipeline {
     agent any
 
     environment {
+        // Jenkins credentials
         DOCKERHUB_CREDS  = credentials('dockerhub-creds')
         APP_SERVER_IP    = credentials('app-server-ip')
+        // Docker Hub image
         IMAGE_NAME       = "frazedcoker/inventory-app"
         IMAGE_TAG        = "build-${env.BUILD_NUMBER}"
     }
@@ -11,6 +18,7 @@ pipeline {
     stages {
 
         stage('Checkout') {
+            // Pulls latest code
             steps {
                 echo "Checking out branch: ${env.GIT_BRANCH}"
                 echo "Commit: ${env.GIT_COMMIT}"
@@ -19,6 +27,7 @@ pipeline {
         }
 
         stage('Build') {
+            // Build docker image
             steps {
                 echo "Building Docker image ${IMAGE_NAME}:${IMAGE_TAG}"
                 sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest ./app"
@@ -26,6 +35,7 @@ pipeline {
         }
 
         stage('Verify') {
+            // verify container started
             steps {
                 echo "Running container smoke test"
                 sh """
@@ -41,6 +51,7 @@ pipeline {
         }
 
         stage('Deploy') {
+            // Pushes the image to Docker Hub
             steps {
                 echo "Pushing image to Docker Hub"
                 sh """
