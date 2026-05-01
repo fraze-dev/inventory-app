@@ -10,11 +10,11 @@ def get_db():
     return client["inventory_db"]
 
 STARTER_PRODUCTS = [
-    {"name": "Widget A",    "stock": 50},
-    {"name": "Widget B",    "stock": 30},
-    {"name": "Gadget X",    "stock": 20},
-    {"name": "Gadget Y",    "stock": 15},
-    {"name": "Doohickey Z", "stock": 40},
+    {"name": "Sweatshirt",    "stock": 50},
+    {"name": "T-shirt",    "stock": 30},
+    {"name": "Baseball Hat",    "stock": 20},
+    {"name": "Polo shirt",    "stock": 15},
+    {"name": "Athletic Shorts", "stock": 40},
 ]
 
 def seed_db(db):
