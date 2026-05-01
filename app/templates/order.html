@@ -6,7 +6,10 @@
     <style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
         h1 { color: #006747; }
-        nav a { margin-right: 20px; text-decoration: none; color: #006747; font-weight: bold; }
+        nav { display: flex; flex-direction: column; width: 180px; gap: 10px; margin-top: 20px; }
+        nav a { text-decoration: none; color: white; font-weight: bold; background-color: #006747;
+            padding: 10px 16px; border-radius: 6px; }
+        nav a:hover { background-color: #004d35; }
         form { margin-top: 20px; }
         label { display: block; margin-top: 15px; font-weight: bold; }
         select, input[type=number] { width: 100%; padding: 8px; margin-top: 5px; }
@@ -19,11 +22,13 @@
 </head>
 <body>
     <h1>USF Inventory System</h1>
+    <div style="display: flex; gap: 30px; align-items: flex-start;">
     <nav>
         <a href="/">Inventory</a>
         <a href="/order">Place Order</a>
         <a href="/restock">Restock</a>
     </nav>
+    <div style="flex: 1;">
     <h2>Place an Order</h2>
     {% if message %}
         <div class="message {{ 'error' if 'Insufficient' in message or 'not found' in message else '' }}">
@@ -43,5 +48,7 @@
         <input type="number" name="quantity" id="quantity" value="1" min="1">
         <button type="submit">Ship Order</button>
     </form>
+    </div>
+    </div>
 </body>
 </html>
